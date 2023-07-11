@@ -9,12 +9,14 @@ dotenv.config()
 
 app.use(express.json());
 app.use(cors());
+
+app.use(morgan('dev'));
 app.use('/api/v1/test',require('./routes/test_route') );
 
-const PORT =  5080;
+const PORT =  3000;
 
 
 app.listen(PORT,()=>{
-    console.log(`server started for  on port ${PORT}`);
+    console.log(`server started for port ${PORT}`);
 })
 
