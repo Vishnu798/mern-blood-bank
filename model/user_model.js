@@ -4,31 +4,33 @@ const userSchema = mongoose.Schema({
     role:{
         type:String,
         required:[true,"role is required"],
-        enum:['admin','organization','user','hospital']
+        enum:['admin','organization','donar','hospital']
     },
     name:{
         type:String,
         required:function(){
-            if(this.role==='user' || this.role==='admin'){
+            if(this.role==='donar' || this.role==='admin'){
                 return true;
             }
-            else{
-                return false;
-            }
+            return false;
         }
     },
-    organizationName:function(){
+    organizationName:{
+        type:String,
+        required:function(){
         if(this.role==='organization'){
             return true;
         }
         return false;
-    },
-    hospitalName:function(){
-        if(this.role==='hospital'){
+    }},
+    hospitalName:{
+        type:String,
+        required:function(){
+        if(this.role==='hopital'){
             return true;
         }
         return false;
-    },
+    }},
     email:{
         type:String,
         required:[true,"email is required"],

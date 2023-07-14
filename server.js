@@ -14,6 +14,8 @@ app.use(cors());
 
 app.use(morgan('dev'));
 app.use('/api/v1/test',require('./routes/test_route') );
+app.use('/api/v1/auth',require('./routes/authRoute'));
+app.use('/api/v1/auth',require('./routes/authRoute'))
 
 const PORT =  3000;
 
