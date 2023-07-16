@@ -45,6 +45,13 @@ if(!existingUser){
     });
 }
 
+if(existingUser.role!=req.body.role){
+    return res.status(404).json({
+        success:false,
+        message:"role does not match"
+    })
+}
+
     const compareUser =await bycript.compare(req.body.password,existingUser.password);
     if(!compareUser){
         return res.status(404).json({

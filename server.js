@@ -15,9 +15,11 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use('/api/v1/test',require('./routes/test_route') );
 app.use('/api/v1/auth',require('./routes/authRoute'));
-app.use('/api/v1/auth',require('./routes/authRoute'))
+app.use('/api/v1/auth',require('./routes/authRoute'));
+app.use('/api/v1/inventory',require('./routes/inventoryRoute'));
+app.use('/api/v1/get-inventory',require('./routes/inventoryRoute'));
 
-const PORT =  3000;
+const PORT =  8000;
 
 
 app.listen(PORT,()=>{
