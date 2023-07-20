@@ -11,7 +11,7 @@ const Login = () => {
         </div>
         <div className='col-md-4 form-container'>
 
-      <Form/>
+      <Form submitBtn={"Login"} formTitle={"Login Page"} formType={'login'}/>
 
         </div>
       </div>
