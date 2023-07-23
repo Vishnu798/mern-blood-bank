@@ -34,7 +34,9 @@ const authController = async(req,res)=>{
 
 const loginController=async(req,res)=>{
     try {
+        console.log("login start")
         const existingUser = await user_model.findOne({email:req.body.email});
+        console.log(existingUser)
 
 
 if(!existingUser){
@@ -46,13 +48,17 @@ if(!existingUser){
 }
 
 if(existingUser.role!=req.body.role){
+    console.log(existingUser.role)
+    console.log(req.body.role)
     return res.status(404).json({
         success:false,
         message:"role does not match"
     })
 }
-
+    console.log("going to check token")
+    console.log("pass is::::",req.body.password)
     const compareUser =await bycript.compare(req.body.password,existingUser.password);
+    console.log("after checking",compareUser)
     if(!compareUser){
         return res.status(404).json({
             success:"fail",
