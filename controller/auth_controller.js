@@ -19,14 +19,16 @@ const authController = async(req,res)=>{
         await user.save()
         res.status(201).send({
             success:true,
-            message:"successully added in db"
+            message:"successully added in db",
+            user
         })
     } catch (error) {
         console.log("error on login : ",error);
         res.status(500).send({
             success:false,
             message:"error in auth Api",
-            error
+            error,
+            
         })
 
     }

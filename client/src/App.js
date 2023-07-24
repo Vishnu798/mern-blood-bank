@@ -7,6 +7,7 @@ import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProtectedRoute from './Routes/ProtectedRoute';
 
 function App() {
   return (
@@ -14,9 +15,16 @@ function App() {
       <ToastContainer/>
      <Routes>
       <Route path='/'
-      element={<HomePage/>}
-      ></Route>
+      
+      element={
+      <ProtectedRoute>
+        <HomePage/>
+        
+        </ProtectedRoute>
+    }
+     />
       <Route path='/login'
+
       element={<Login></Login>}
       ></Route>
       <Route path='/register' 

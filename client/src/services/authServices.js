@@ -1,4 +1,4 @@
-import { userLogin } from '../redux/features/auth/authAction'
+import { userLogin, userRegister } from '../redux/features/auth/authAction'
 import store from '../redux/store'
 
 export const handleLogin = (e,email,password,role)=>{
@@ -26,9 +26,11 @@ export const handleRegister = (e,
     website,
     address,
     phone)=>{
+        console.log("inside auth service register function")
+        e.preventDefault();
         try {
-            console.log("Register =>",  e,
-            email,
+            
+           store.dispatch(userRegister({email,
             password,
             role,
             name,
@@ -36,8 +38,9 @@ export const handleRegister = (e,
             hospitalName,
             website,
             address,
-            phone)
+            phone}))
         } catch (error) {
+            console.log("here error present")
             console.log(error)
         }
 }
