@@ -12,8 +12,8 @@ const ProtectedRoute = ({ children }) => {
     try {
       const res= await API.get("/auth/current-user");
       if (res) {
-        console.log("protected router data", res.data);
-        dispatch(getCurrentuser(res.data));
+        console.log("protected router data", res);
+        dispatch(getCurrentuser(res));
       }
       console.log("inside get user function protected router")
     } catch (error) {

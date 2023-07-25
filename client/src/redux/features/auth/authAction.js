@@ -12,7 +12,8 @@ export const userLogin = createAsyncThunk(
                     if(data.success){
                         localStorage.setItem('token',data.token)
                         console.log(data.message)
-                        toast.success(data.message)
+                        //toast.success(data.message)
+                        alert(data.message)
                         window.location.replace('/')
                     } 
                    return data;
@@ -55,7 +56,8 @@ export const userLogin = createAsyncThunk(
                         console.log("register data is : ",data);
                         if(data.success){
                             console.log("register data is : ",data);
-                            toast.success(data.message)
+                            //toast.success(data.message)
+                            alert(data.message)
                             window.location.replace('/login')
                         }
                         return data;

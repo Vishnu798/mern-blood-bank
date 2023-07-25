@@ -12,10 +12,10 @@ const inventoryController = async(req,res)=>{
         if(!user){
             throw new Error("user not exist");
         }
-        if(inventoryType==='in' && user.role!=='donar'){
-            throw new Error("not a donor account");
+        // if(inventoryType==='in' && user.role!=='donar'){
+        //     throw new Error("not a donor account");
 
-        }
+        // }
         if(inventoryType==='out' && user.role!=='hospital'){
             throw new Error("not a hospital");
 
