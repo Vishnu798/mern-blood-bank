@@ -12,26 +12,26 @@ const ProtectedRoute = ({ children }) => {
     try {
       const res= await API.get("/auth/current-user");
       if (res) {
-        console.log("protected router data", res);
+      //  console.log("protected router data", res);
         dispatch(getCurrentuser(res));
       }
-      console.log("inside get user function protected router")
+    //  console.log("inside get user function protected router")
     } catch (error) {
       localStorage.clear();
-      console.log(error);
+     // console.log(error);
     }
   };
 
   useEffect(() => {
-    console.log("use effect is called");
+   // console.log("use effect is called");
      getUser();
   });
 
   if (localStorage.getItem("token")) {
-    console.log("here is children inside protectedRoute",children);
+   // console.log("here is children inside protectedRoute",children);
     return children;
   } else {
-    console.log("not children")
+    //console.log("not children")
     return <Navigate to="/login" />;
   }
 };

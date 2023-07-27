@@ -1,12 +1,47 @@
+
 import React, { useState } from "react";
 import Input from "../Forms/Input";
-import InputType from "../Forms/Input";
+import {useSelector} from 'react-redux'
+import API from '../../../services/Api'
+
 
 const Modal = () => {
   const [inventoryType, setInventoryType] = useState("in");
-  const [bloodGroup, setBloodGroup] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("O+");
   const [quantity, setQuantity] = useState(0);
-  const [donarEmail, setDonarEmail] = useState("");
+  const [email, setEmail] = useState("");
+
+  const {user} = useSelector(state=>state.auth)
+
+
+  const handleModelSubmit = async()=>{
+    try {
+      if(!bloodGroup || !quantity || !email){
+        return alert("please fill all details")
+      }
+      const reqs = await API.post('/inventory',{
+        bloodGroup,
+        
+        organization:user?._id,
+        quantity,
+        email,
+        inventoryType
+      });
+      console.log("data inside handlemodelSubmit is",reqs)
+      if(reqs){
+        alert("inventory created successfully")
+        window.location.reload();
+      }
+    } catch (error) {
+      alert(error.response.data.message)
+      window.location.reload();
+      console.log("error inside handleModelSubmit ::",error);
+
+    }
+
+    
+  }
+
   return (
     <>
       {/* Modal */}
@@ -78,8 +113,8 @@ const Modal = () => {
                     labelFor={"donarEmail"}
                     labelText={"Donar Email"}
                     name={"donaremail"}
-                    onChange={(e) => setDonarEmail(e.target.value)}
-                    value={donarEmail}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                   />
                   <Input
                     inputType={"Number"}
@@ -98,7 +133,7 @@ const Modal = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="button" className="btn btn-primary" onClick={handleModelSubmit}>
                 Submit
               </button>
             </div>

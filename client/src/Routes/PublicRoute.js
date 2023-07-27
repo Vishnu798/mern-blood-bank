@@ -6,7 +6,7 @@ const PublicRoute = ({children}) => {
         
         return <Navigate to="/" />;
       } else {
-        console.log("children")
+       // console.log("children")
         return children;
       }
 }

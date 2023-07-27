@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+
 import Form from '../../components/Shared/Forms/Form'
 import {useSelector} from 'react-redux'
 import Spinner from '../../components/Shared/Spinner'
 
 
 const Login = () => {
-  const [loadings,setLoading] = useState(false);
-  const {loading,error,user} = useSelector(state=>state.auth) 
+
+  const {loading,error} = useSelector(state=>state.auth) 
  
   //{error && <span>{alert(error)}</span>}
   

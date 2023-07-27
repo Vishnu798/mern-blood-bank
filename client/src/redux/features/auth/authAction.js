@@ -6,14 +6,14 @@ export const userLogin = createAsyncThunk(
     'auth/login',
     async ({role,email,password},{rejectWithValue})=>{
                 try {
-                    console.log("inside action",password)
+                   // console.log("inside action",password)
                     const {data} = await API.post('/auth/login',{role,email,password});
-                    console.log("after data variable inside action",data)
+                  //  console.log("after data variable inside action",data)
                     if(data.success){
                         localStorage.setItem('token',data.token)
-                        console.log(data.message)
+                   //     console.log(data.message)
                         //toast.success(data.message)
-                        alert(data.message)
+                       
                         window.location.replace('/')
                     } 
                    return data;
@@ -43,7 +43,7 @@ export const userLogin = createAsyncThunk(
             phone},{rejectWithValue})=>{
                
                 try {
-                    console.log("here inside userRegister")
+                   // console.log("here inside userRegister")
                     const {data} =  await API.post('/auth/register',{email,
                         password,
                         role,
@@ -53,9 +53,9 @@ export const userLogin = createAsyncThunk(
                         website,
                         address,
                         phone});
-                        console.log("register data is : ",data);
+                     //   console.log("register data is : ",data);
                         if(data.success){
-                            console.log("register data is : ",data);
+                           // console.log("register data is : ",data);
                             //toast.success(data.message)
                             alert(data.message)
                             window.location.replace('/login')
@@ -79,12 +79,12 @@ export const userLogin = createAsyncThunk(
         async({rejectWithValue})=>{
             try {
                 const res = await API.get('/auth/current-user');
-                console.log("data for current user is :",res)
+              //  console.log("data for current user is :",res)
                 if(res?.data){
                     //console.log("data for current user is :",res)
                     return res?.data;
                 }
-                console.log("data is not defined inside auth action ");
+               // console.log("data is not defined inside auth action ");
             } catch (error) {
                 if(error.response && error.response.data.message){
                     return rejectWithValue(error.response.data.message)

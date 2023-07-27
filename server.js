@@ -18,6 +18,7 @@ app.use('/api/v1/auth',require('./routes/authRoute'));
 app.use('/api/v1/auth',require('./routes/authRoute'));
 app.use('/api/v1/inventory',require('./routes/inventoryRoute'));
 app.use('/api/v1/get-inventory',require('./routes/inventoryRoute'));
+app.use('/api/v1/inventory',require('./routes/inventoryRoute'));
 
 const PORT =  8000;
 

@@ -27,16 +27,16 @@ const inventorySchema = new mongoose.Schema({
                 return this.inventoryType === "out";
             }
         },
-        donarEmail:{
+        email:{
             type:String,
             required:[true,"donar email is required"]
         },
         donar:{
             type:mongoose.Schema.Types.ObjectId,
             ref:'users',
-            // required:function(){
-            //     return this.inventoryType === "in";
-            // }
+            required:function(){
+                return this.inventoryType === "in";
+            }
         }
 },{timestamps:true});
 
