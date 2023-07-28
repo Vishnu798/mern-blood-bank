@@ -6,7 +6,7 @@ const inventoryController = async (req, res) => {
   try {
     console.log("first");
     const { email } = req.body;
-    console.log("here");
+    console.log("here email is : ",email);
     const user = await user_model.findOne({ email });
     console.log(user);
 
@@ -76,9 +76,10 @@ const inventoryController = async (req, res) => {
       }
       req.body.hospital = user?._id;
     } else {
+
       req.body.donar = user?._id;
     }
-
+    
     const inventory = new inventory_model(req.body);
     await inventory.save();
 
@@ -118,7 +119,7 @@ const getinventoryController = async (req, res) => {
 const getDonarsController = async (req, res) => {
   try {
     const organization = req.body.userId;
-
+    console.log("user is of getDonars is : ",organization);
     const donarId = await inventory_model.distinct("donar",{
         organization
     });
@@ -139,8 +140,61 @@ const getDonarsController = async (req, res) => {
     });
   }
 };
+
+const hospitalController = async(req,res)=>{
+
+  try {
+    console.log("inside hospitalController function")
+    const organization = req.body.userId;
+    console.log("user is of hospital is : ",organization);
+    const hospitalId = await inventory_model.distinct('hospital',{organization});
+    console.log("hospital id is : ",hospitalId);
+    
+    const hospitals = await user_model.find({_id:{$in:hospitalId}});
+    return res.status(200).json({
+      status:true,
+      message:"hospital records fetched successfully",
+      hospitals
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({
+      status:false,
+      message:"error in get hospital data api",
+      error
+    })
+  }
+}
+
+const organizationController = async(req,res)=>{
+  try {
+    const organization = req.body.userId;
+    console.log("user is of getDonars is : ",organization);
+    const donarId = await inventory_model.distinct("donar",{
+        organization
+    });
+    console.log("donar id is ::: :: ", donarId);
+
+    const organizations = await user_model.find({_id:{$in:donarId}});
+
+     return res.status(200).json({
+      status:true,
+      message:"organization data fetched succesfully",
+      organizations
+     })
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({
+      status:false,
+      message:"error in organization api",
+      error
+    })
+  }
+}
 module.exports = {
   inventoryController,
   getinventoryController,
   getDonarsController,
+  hospitalController,
+  organizationController
 };
